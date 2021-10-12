@@ -1,9 +1,9 @@
 import * as mongoose from 'mongoose';
-import { MongooseTFOptions } from './types';
+import { MongooseTFOptionsInternal } from './types';
 
 const isObject = (obj: any): boolean => Object.prototype.toString.call(obj) === '[object Object]';
 
-export const createNewQuery = (ref: mongoose.Query<any, any>, fieldsWithoutTimeStamp: string[]): mongoose.FilterQuery<any> | null => {
+export const createNewQuery = (ref: mongoose.Query<any, any>, fieldsWithoutTimeStamp: any[]): mongoose.FilterQuery<any> | null => {
   const originalQuery = ref.getQuery();
   const queryKeys = Object.keys(originalQuery);
   let query = {};
@@ -13,7 +13,7 @@ export const createNewQuery = (ref: mongoose.Query<any, any>, fieldsWithoutTimeS
   return query;
 };
 
-export const createSaveObj = (obj: mongoose.DocumentDefinition<mongoose.Document<any, any, any>> & { _id: any }, options: MongooseTFOptions): mongoose.DocumentDefinition<mongoose.Document<any, any, any>> & { _id: any } => {
+export const createSaveObj = (obj: mongoose.DocumentDefinition<mongoose.Document<any, any, any>> & { _id: any }, options: MongooseTFOptionsInternal): mongoose.DocumentDefinition<mongoose.Document<any, any, any>> & { _id: any } => {
   const date = new Date();
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { _id, ...restOfObj } = obj;
@@ -31,7 +31,7 @@ export const createSaveObj = (obj: mongoose.DocumentDefinition<mongoose.Document
   }(restOfObj));
 };
 
-export const createUpdateSetObj = (dataToUpdate: Record<string, any>, currentDoc: Record<string, any>, options: MongooseTFOptions): Record<string, any> => {
+export const createUpdateSetObj = (dataToUpdate: Record<string, any>, currentDoc: Record<string, any>, options: MongooseTFOptionsInternal): Record<string, any> => {
   const date = new Date();
   return (function recursive(dataToUpdateRecursive: Record<string, any>, currentDocRecursive: Record<string, any>) {
     let update = {};

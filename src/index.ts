@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import { MongooseTFOptions, ILastUpdated } from './types';
+import { ITimestampFields, MongooseTFOptionsInternal, MongooseTFOptions } from './types';
 import { createUpdateSetObj, createSaveObj, createNewQuery } from './utils';
 
-export const getSchemaTypeForMongoose = (type: mongoose.SchemaDefinition<mongoose.DocumentDefinition<undefined>>, required = false): mongoose.SchemaDefinition<mongoose.DocumentDefinition<undefined>> => ({
+export const getSchemaTypeForMongooseTimestampFields = (type: mongoose.SchemaDefinition<mongoose.DocumentDefinition<undefined>>, required = false): mongoose.SchemaDefinition<mongoose.DocumentDefinition<undefined>> => ({
   type: {
     value: type,
     updatedAt: {
@@ -12,7 +12,7 @@ export const getSchemaTypeForMongoose = (type: mongoose.SchemaDefinition<mongoos
   required,
 });
 
-export const lastUpdatedForEachField = (schema: mongoose.Schema<mongoose.Document<any>, mongoose.Model<mongoose.Document<any>>>, options: MongooseTFOptions): void => {
+export const MongooseTimestampFieldsPlugin = (schema: mongoose.Schema<mongoose.Document<any>, mongoose.Model<mongoose.Document<any>>>, options: MongooseTFOptionsInternal): void => {
   options.fieldsWithoutTimeStamp.push('_id');
 
   schema.pre(['findOneAndUpdate'], async function findOneAndUpdate(next) {
@@ -48,5 +48,4 @@ export const lastUpdatedForEachField = (schema: mongoose.Schema<mongoose.Documen
   });
 };
 
-// TODO: Better Naming Before Publishing
-export { ILastUpdated, MongooseTFOptions };
+export { ITimestampFields, MongooseTFOptions };

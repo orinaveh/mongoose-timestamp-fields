@@ -1,12 +1,16 @@
-type ILastUpdatedHelper<I, T extends keyof I> = {
+type ITimestampFieldsHelper<I, T extends keyof I> = {
   [K in keyof Omit<I, T>]: {
     value: I[K]
     updatedAt: Date;
   }
 };
 
-export type ILastUpdated<I, T extends keyof I> = ILastUpdatedHelper<I, T> & Pick<I, T>;
+export interface MongooseTFOptionsInternal {
+  fieldsWithoutTimeStamp: string[];
+}
 
-export interface MongooseTFOptions {
-  fieldsWithoutTimeStamp: string[]
+export type ITimestampFields<OriginalInterface, FieldsToRemove extends keyof OriginalInterface> = ITimestampFieldsHelper<OriginalInterface, FieldsToRemove> & Pick<OriginalInterface, FieldsToRemove>;
+
+export interface MongooseTFOptions<OriginalInterface> {
+  fieldsWithoutTimeStamp: Array<keyof OriginalInterface>
 }
