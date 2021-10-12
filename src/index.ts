@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { ITimestampFields, MongooseTFOptionsInternal, MongooseTFOptions } from './types';
+import { TimestampFields, MongooseTFOptionsInternal, MongooseTFOptions } from './types';
 import { createUpdateSetObj, createSaveObj, createNewQuery } from './utils';
 
 export const getSchemaTypeForMongooseTimestampFields = (type: mongoose.SchemaDefinition<mongoose.DocumentDefinition<undefined>>, required = false): mongoose.SchemaDefinition<mongoose.DocumentDefinition<undefined>> => ({
@@ -48,4 +48,4 @@ export const MongooseTimestampFieldsPlugin = (schema: mongoose.Schema<mongoose.D
   });
 };
 
-export { ITimestampFields, MongooseTFOptions };
+export { TimestampFields as ITimestampFields, MongooseTFOptions };
