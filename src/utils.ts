@@ -17,18 +17,21 @@ export const createSaveObj = (obj: mongoose.DocumentDefinition<mongoose.Document
   const date = new Date();
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { _id, ...restOfObj } = obj;
-  return (function recursive(objRecursive: Record<string, any>) {
-    let user = {};
-    Object.keys(objRecursive).forEach((key) => {
-      if (isObject(objRecursive[key])) {
-        const objFromRecursion = recursive(objRecursive[key]);
-        user = { ...user, [key]: objFromRecursion };
-      } else {
-        user = { ...user, [key]: ![...options.fieldsWithoutTimeStamp].includes(key) ? { value: objRecursive[key], updatedAt: date } : objRecursive[key] };
-      }
-    });
-    return { ...user, _id };
-  }(restOfObj));
+  return ({
+    _id,
+    ...(function recursive(objRecursive: Record<string, any>) {
+      let user = {};
+      Object.keys(objRecursive).forEach((key) => {
+        if (isObject(objRecursive[key])) {
+          const objFromRecursion = recursive(objRecursive[key]);
+          user = { ...user, [key]: objFromRecursion };
+        } else {
+          user = { ...user, [key]: ![...options.fieldsWithoutTimeStamp].includes(key) ? { value: objRecursive[key], updatedAt: date } : objRecursive[key] };
+        }
+      });
+      return user;
+    }(restOfObj)),
+  });
 };
 
 export const createUpdateSetObj = (dataToUpdate: Record<string, any>, currentDoc: Record<string, any>, options: MongooseTFOptionsInternal): Record<string, any> => {
