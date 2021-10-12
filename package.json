@@ -1,8 +1,8 @@
 {
   "name": "mongoose-timestamp-fields",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Adds a field called updatedAt to each field with the date of the update.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "files": [
     "dist/**/*"
   ],
@@ -18,7 +18,9 @@
     "url": "git+https://github.com/orinaveh/mongoose-timestamp-fields.git"
   },
   "keywords": [
-    "mongoose"
+    "mongoose",
+    "timestamp",
+    "mongoose-plugin"
   ],
   "author": "Ori Naveh",
   "license": "ISC",
