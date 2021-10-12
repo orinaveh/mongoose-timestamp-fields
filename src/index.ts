@@ -48,4 +48,4 @@ export const MongooseTimestampFieldsPlugin = (schema: mongoose.Schema<mongoose.D
   });
 };
 
-export { TimestampFields as ITimestampFields, MongooseTFOptions };
+export { TimestampFields, MongooseTFOptions };
