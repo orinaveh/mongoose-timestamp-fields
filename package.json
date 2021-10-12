@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Adds a field called updatedAt to each field with the date of the update.",
   "main": "index.js",
+  "files": [
+    "dist/**/*"
+  ],
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
@@ -22,7 +26,8 @@
     "url": "https://github.com/orinaveh/mongoose-timestamp-fields/issues"
   },
   "homepage": "https://github.com/orinaveh/mongoose-timestamp-fields#readme",
-  "dependencies": {
+  "dependencies": {},
+  "peerDependencies": {
     "mongoose": "^6.0.10"
   },
   "devDependencies": {
@@ -31,6 +36,7 @@
     "eslint": "^7.20.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-plugin-import": "^2.22.1",
-    "typescript": "^4.4.3"
+    "typescript": "^4.4.3",
+    "mongoose": "^6.0.10"
   }
 }
