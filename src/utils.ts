@@ -45,7 +45,7 @@ export const createUpdateSetObj = (dataToUpdate: Record<string, any>, currentDoc
           update = { ...update, [key]: objFromRecursion };
         }
       } else if (!options.fieldsWithoutTimeStamp.includes(key)
-      && (!currentDocRecursive[key]?.value || JSON.parse(JSON.stringify(currentDocRecursive[key]?.value)) !== JSON.parse(JSON.stringify(dataToUpdateRecursive[key])))) {
+      && (currentDocRecursive[key]?.value === undefined || JSON.parse(JSON.stringify(currentDocRecursive[key]?.value)) !== JSON.parse(JSON.stringify(dataToUpdateRecursive[key])))) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         update = { ...update, [key]: { value: dataToUpdateRecursive[key], updatedAt: date } };
       } else if (options.fieldsWithoutTimeStamp.includes(key) && JSON.parse(JSON.stringify(currentDocRecursive[key])) !== JSON.parse(JSON.stringify(dataToUpdateRecursive[key]))) {
