@@ -7,10 +7,12 @@ type TimestampFieldsHelper<I, T extends keyof I> = {
 
 export interface MongooseTFOptionsInternal {
   fieldsWithoutTimeStamp: string[];
+  setOnSubObjects?: boolean;
 }
 
 export type TimestampFields<OriginalInterface, FieldsToRemove extends keyof OriginalInterface> = TimestampFieldsHelper<OriginalInterface, FieldsToRemove> & Pick<OriginalInterface, FieldsToRemove>;
 
 export interface MongooseTFOptions<OriginalInterface> {
-  fieldsWithoutTimeStamp: Array<keyof OriginalInterface>
+  fieldsWithoutTimeStamp: Array<keyof OriginalInterface>,
+  setOnSubObjects?: boolean;
 }

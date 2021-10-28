@@ -19,7 +19,7 @@ export const MongooseTimestampFieldsPlugin = (schema: mongoose.Schema<mongoose.D
     try {
       this.setQuery(createNewQuery(this, options.fieldsWithoutTimeStamp));
       const objectToInsert = (this?.getUpdate() as mongoose.UpdateQuery<any>).$set ?? this?.getUpdate() as mongoose.UpdateQuery<any>;
-      const currentDoc = await this?.findOne();
+      const currentDoc = await this?.findOne().lean().exec();
       if (!objectToInsert) {
         throw new Error('$set is undef');
       }
