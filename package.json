@@ -1,6 +1,6 @@
 {
   "name": "mongoose-timestamp-fields",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Adds a field called updatedAt to each field with the date of the update.",
   "main": "dist/index.js",
   "files": [

@@ -8,6 +8,7 @@ This plugin supports Typescript, and exports two types:
 
  - MongooseTFOptions: the options of the plugins. it includes: 
    - fieldsWithoutTimeStamp: an array of strings. insert the fields you want to ignore.
+   - setOnSubObjects(Default: false): an option to insert fields to a nested object without overwriting the other fields.
 
 For defining Mongoose Schema, use getSchemaTypeForMongoose(type, required = false). for example: 
 ``address: getSchemaTypeForMongoose(String) // address: {value: 'Reuven Lerer 2, NZ', updatedAt: 2021-10-11T12:54:46.631Z} not required

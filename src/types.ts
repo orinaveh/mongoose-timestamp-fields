@@ -1,5 +1,5 @@
-type TimestampFieldsHelper<I, T extends keyof I> = {
-  [K in keyof Omit<I, T>]: {
+type TimestampFieldsHelper<I, T extends string | number | symbol> = {
+  [K in keyof I]: I[K] extends Record<any, any> ? TimestampFieldsHelper<I[K], T> : K extends T ? I[K] : {
     value: I[K]
     updatedAt: Date;
   }
@@ -10,7 +10,7 @@ export interface MongooseTFOptionsInternal {
   setOnSubObjects?: boolean;
 }
 
-export type TimestampFields<OriginalInterface, FieldsToRemove extends keyof OriginalInterface> = TimestampFieldsHelper<OriginalInterface, FieldsToRemove> & Pick<OriginalInterface, FieldsToRemove>;
+export type TimestampFields<OriginalInterface, FieldsToRemove extends string | number | symbol> = TimestampFieldsHelper<OriginalInterface, FieldsToRemove>;
 
 export interface MongooseTFOptions<OriginalInterface> {
   fieldsWithoutTimeStamp: Array<keyof OriginalInterface>,
